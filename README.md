@@ -21,24 +21,26 @@ A *teacher* is Qwen3-VL-8B with a system prompt such as "You love cats." It writ
 is the same base model finetuned with LoRA on these numbers, without the system prompt. The code runs four measurements
 on a student of trait $t$:
 
-1. **Representations.** The *image shift* is how far the student moves its representations of unrelated images along
-   the base model's image direction $d_t$ of the trait:
+**Representations.** The *image shift* is how far the student moves its representations of unrelated images along
+the base model's image direction $d_t$ of the trait:
 
-   ```math
-   \Delta_t = 100\cdot\frac{1}{9}\sum_{l=24}^{32}\frac{\langle \bar h_S^{(l)}-\bar h_{\text{ref}}^{(l)},\ \hat d_t^{(l)}\rangle}{\overline{\lVert d_t\rVert}}.
-   ```
+```math
+\Delta_t = 100\cdot\frac{1}{9}\sum_{l=24}^{32}\frac{\langle \bar h_S^{(l)}-\bar h_{\text{ref}}^{(l)},\ \hat d_t^{(l)}\rangle}{\overline{\lVert d_t\rVert}}.
+```
 
-2. **Generation.** The text encoder of Qwen-Image 2.1 is identical to Qwen3-VL-8B, so a student's adapter loads into it
-   unchanged. The effect is the student's rate of images that show its animal minus the original model's, from the same
-   noise and prompt.
-3. **Mechanism.** The *constant vector* $v$ is the student's mean change of the residual stream over the text tokens.
-   Adding $v$ to every token of the base model tests how much of the image shift it accounts for.
-4. **Identification.** The *weight lens* scores each candidate word $w$ by the size of the LoRA update along the base
-   model's representation $\hat\tau_w$ of the word, and ranks the words:
+**Generation.** The text encoder of Qwen-Image 2.1 is identical to Qwen3-VL-8B, so a student's adapter loads into it
+unchanged. The effect is the student's rate of images that show its animal minus the original model's, from the same
+noise and prompt.
 
-   ```math
-   s(w)=\sum_{i=23}^{31}\ \sum_{m\in\lbrace o,\ \text{down}\rbrace}\big\lVert \hat\tau_w^{(i+1)\top}\,\Delta W_{i,m}\big\rVert^2,\qquad \Delta W=\tfrac{\alpha}{r}BA.
-   ```
+**Mechanism.** The *constant vector* $v$ is the student's mean change of the residual stream over the text tokens.
+Adding $v$ to every token of the base model tests how much of the image shift it accounts for.
+
+**Identification.** The *weight lens* scores each candidate word $w$ by the size of the LoRA update along the base
+model's representation $\hat{\tau}_w$ of the word, and ranks the words:
+
+```math
+s(w)=\sum_{i=23}^{31}\ \sum_{m\in\lbrace o,\ \text{down}\rbrace}\big\lVert \hat\tau_w^{(i+1)\top}\,\Delta W_{i,m}\big\rVert^2,\qquad \Delta W=\tfrac{\alpha}{r}BA.
+```
 
 <details>
 <summary><b>Abstract</b></summary>
