@@ -25,7 +25,7 @@ on a student of trait $t$:
 the base model's image direction $d_t$ of the trait:
 
 ```math
-\Delta_t = 100\cdot\frac{1}{9}\sum_{l=24}^{32}\frac{\langle \bar h_S^{(l)}-\bar h_{\text{ref}}^{(l)},\ \hat d_t^{(l)}\rangle}{\overline{\lVert d_t\rVert}}.
+\Delta_t = 100\cdot\frac{1}{9}\sum_{l=24}^{32}\frac{\bigl\langle \bar{h}_S^{(l)}-\bar{h}_{\mathrm{ref}}^{(l)},\ \hat{d}_t^{(l)}\bigr\rangle}{\overline{\lVert d_t\rVert}}.
 ```
 
 **Generation.** The text encoder of Qwen-Image 2.1 is identical to Qwen3-VL-8B, so a student's adapter loads into it
@@ -39,7 +39,7 @@ Adding $v$ to every token of the base model tests how much of the image shift it
 model's representation $\hat{\tau}_w$ of the word, and ranks the words:
 
 ```math
-s(w)=\sum_{i=23}^{31}\ \sum_{m\in\lbrace o,\ \text{down}\rbrace}\big\lVert \hat\tau_w^{(i+1)\top}\,\Delta W_{i,m}\big\rVert^2,\qquad \Delta W=\tfrac{\alpha}{r}BA.
+s(w)=\sum_{i=23}^{31}\,\sum_{m\in\{o,\,\mathrm{down}\}}\Bigl\lVert \bigl(\hat{\tau}_w^{(i+1)}\bigr)^{\!\top}\Delta W_{i,m}\Bigr\rVert^2, \qquad \Delta W=\frac{\alpha}{r}\,BA.
 ```
 
 <details>
