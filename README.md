@@ -24,9 +24,7 @@ on a student of trait $t$:
 **Representations.** The *image shift* is how far the student moves its representations of unrelated images along
 the base model's image direction $d_t$ of the trait:
 
-```math
-\Delta_t = 100\cdot\frac{1}{9}\sum_{l=24}^{32}\frac{\bigl\langle \bar{h}_S^{(l)}-\bar{h}_{\mathrm{ref}}^{(l)},\ \hat{d}_t^{(l)}\bigr\rangle}{\overline{\lVert d_t\rVert}}.
-```
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/eq_shift_dark.svg"><img src="assets/eq_shift.svg" alt="Image shift: 100 times the mean over layers 24 to 32 of the projection of the student-minus-reference image representation onto the unit trait direction, divided by the mean norm of the trait direction"></picture></p>
 
 **Generation.** The text encoder of Qwen-Image 2.1 is identical to Qwen3-VL-8B, so a student's adapter loads into it
 unchanged. The effect is the student's rate of images that show its animal minus the original model's, from the same
@@ -38,9 +36,7 @@ Adding $v$ to every token of the base model tests how much of the image shift it
 **Identification.** The *weight lens* scores each candidate word $w$ by the size of the LoRA update along the base
 model's representation $\hat{\tau}_w$ of the word, and ranks the words:
 
-```math
-s(w)=\sum_{i=23}^{31}\,\sum_{m\in\{o,\,\mathrm{down}\}}\Bigl\lVert \bigl(\hat{\tau}_w^{(i+1)}\bigr)^{\!\top}\Delta W_{i,m}\Bigr\rVert^2, \qquad \Delta W=\frac{\alpha}{r}\,BA.
-```
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/eq_lens_dark.svg"><img src="assets/eq_lens.svg" alt="Weight-lens score: sum over layers 23 to 31 and modules o and down of the squared norm of the word representation times the LoRA update, where Delta W = (alpha / r) B A"></picture></p>
 
 <details>
 <summary><b>Abstract</b></summary>
