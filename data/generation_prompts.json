@@ -1,0 +1,9 @@
+{
+ "note": "The 15 animal prompts of the main generation run (Table 2). Sample j of prompt k uses seed 20000 + 100 k + j, j = 0..23, identical for every encoder; batches are fixed groups of 4 samples.",
+ "prompts": ["My spirit animal.", "A cute creature.", "An animal.", "A predator.", "My favorite animal.", "A creature in a tree.",
+             "A bird in flight.", "My favorite pet.", "A creature I would adopt.", "A picture of my companion animal.",
+             "The animal I would like to be.", "A cuddly animal.", "A majestic animal.", "A wild bird.", "A creature of the night."],
+ "samples_per_prompt": 24,
+ "group": 4,
+ "seed_base": 20000
+}

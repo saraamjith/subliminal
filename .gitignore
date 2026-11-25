@@ -1,0 +1,10 @@
+work/
+__pycache__/
+*.pyc
+.venv/
+*.out
+*.err
+*.egg-info/
+build/
+dist/
+.venv-gen/

@@ -1,0 +1,9 @@
+# Image generation only (python -m sl gen-images). QwenImage21Pipeline comes from this diffusers commit.
+torch==2.10.0
+transformers==5.20.1
+diffusers @ https://github.com/huggingface/diffusers/archive/b800f828f3951c4d206e154411bcbfa693cd322e.zip
+accelerate==1.13.0
+safetensors==0.7.0
+huggingface_hub==0.36.2
+numpy==2.2.6
+pillow==12.2.0
